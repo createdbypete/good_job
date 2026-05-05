@@ -100,7 +100,11 @@ jobs:
             gemfile: rails_7.2
             pg: 10
           # JRuby 10 targets Ruby 3.4
-          - ruby: jruby-10
+          # Pinned to 10.0.5.0: JRuby 10.1.0.0 removed RubyHash(Ruby, int)
+          # which released arjdbc 72.1 still calls. Fix is merged in
+          # jruby/activerecord-jdbc-adapter#1210 but not yet released. Revert
+          # to `jruby-10` once a 72.2+ release ships. Tracked in #1390.
+          - ruby: jruby-10.0.5.0
             gemfile: rails_7.2
             pg: 18
         exclude:
